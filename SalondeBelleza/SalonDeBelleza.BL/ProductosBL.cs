@@ -8,28 +8,20 @@ namespace SalonDeBelleza.BL
 {
     public class ProductosBL
     {
-      public   List<Producto> ObtenerProductos()
+        Contexto _contexto;
+
+        public List<Producto> ListadeProductos { get; set; }
+
+        public ProductosBL()
         {
-            var producto1 = new Producto();
-            producto1.Id = 1;
-            producto1.Descripcion = "Plancha";
-            producto1.Precio = 600;
+            _contexto = new Contexto();
+            ListadeProductos = new List<Producto>();
+        }
 
-            var producto2 = new Producto();
-            producto2.Id = 2;
-            producto2.Descripcion = "Labial";
-            producto2.Precio = 200;
 
-            var producto3 = new Producto();
-            producto3.Id = 3;
-            producto3.Descripcion = "Sombras";
-            producto3.Precio = 900;
-
-            var ListadeProductos = new List<Producto>();
-            ListadeProductos.Add(producto1);
-            ListadeProductos.Add(producto2);
-            ListadeProductos.Add(producto3);
-
+        public   List<Producto> ObtenerProductos()
+        {
+            ListadeProductos = _contexto.Productos.ToList();
             return ListadeProductos;
         }
     }
