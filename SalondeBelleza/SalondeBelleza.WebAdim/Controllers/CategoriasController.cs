@@ -32,48 +32,68 @@ namespace SalondeBelleza.WebAdim.Controllers
         }
 
         [HttpPost]
-        public ActionResult Crear(Categoria producto)
+        public ActionResult Crear(Categoria categoria)
         {
-            _categoriasBL.GuardarCategorias(producto);
+            if (ModelState.IsValid)
+            {
+                if (categoria.Descripcion != categoria.Descripcion.Trim())
+                {
+                    ModelState.AddModelError("Descripcion", "La descripcion no debe contener espacios al inicio");
+                    return View(categoria);
+                }
+                
+                _categoriasBL.GuardarCategorias(categoria);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            return View(categoria);
         }
 
         public ActionResult Editar(int id)
         {
-            var producto = _categoriasBL.ObtenerCategoria(id);
-            return View(producto);
+            var categoria = _categoriasBL.ObtenerCategoria(id);
+            return View(categoria);
         }
 
         [HttpPost]
-        public ActionResult Editar(Categoria producto)
+        public ActionResult Editar(Categoria categoria)
         {
 
-            _categoriasBL.GuardarCategorias(producto);
+            if (ModelState.IsValid)
+            {
+                if (categoria.Descripcion != categoria.Descripcion.Trim())
+                {
+                    ModelState.AddModelError("Descripcion", "La descripcion no debe contener espacios al inicio");
+                    return View(categoria);
+                }
 
-            return RedirectToAction("Index");
+                _categoriasBL.GuardarCategorias(categoria);
+
+                return RedirectToAction("Index");
+            }
+            return View(categoria);
         }
 
         public ActionResult Detalle(int id)
         {
 
-            var producto = _categoriasBL.ObtenerCategoria(id);
+            var categoria = _categoriasBL.ObtenerCategoria(id);
 
-            return View(producto);
+            return View(categoria);
         }
 
         public ActionResult Eliminar(int id)
         {
-            var producto = _categoriasBL.ObtenerCategoria(id);
+            var categoria = _categoriasBL.ObtenerCategoria(id);
 
-            return View(producto);
+            return View(categoria);
         }
 
         [HttpPost]
-        public ActionResult Eliminar(Categoria producto)
+        public ActionResult Eliminar(Categoria categoria)
         {
 
-            _categoriasBL.EliminarCategoria(producto.Id);
+            _categoriasBL.EliminarCategoria(categoria.Id);
 
             return RedirectToAction("Index");
         }

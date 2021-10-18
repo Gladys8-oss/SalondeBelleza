@@ -34,6 +34,7 @@ namespace SalonDeBelleza.BL
             else
             {
                 var categoriaExistente = _contexto.Categorias.Find(categoria.Id);
+
                 categoriaExistente.Descripcion = categoria.Descripcion;
             }
 

@@ -10,15 +10,15 @@ namespace SalonDeBelleza.BL
 {
   public class Contexto : DbContext
     {
-        public Contexto(): base(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" +
-            Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\SalondeBellezaDB.mdf")
+        public Contexto() : base(@"Data Source=(LocalDb)\MSSQLLocalDB;AttachDBFilename=" +
+            Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\SalondeBelleza.mdf")
         {
 
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-           // Database.SetInitializer(new DatosdeInicio());
+           
         }
         public DbSet<Producto>  Productos { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
