@@ -8,6 +8,7 @@ namespace SalondeBelleza.WebAdmin.Controllers
 {
     public class HomeController : Controller
     {
+        
         // GET: Home
         public ActionResult Index()
         {
